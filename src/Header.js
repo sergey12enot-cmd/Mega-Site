@@ -27,13 +27,13 @@ function Header({ onOpenModal }) {
   return (
     <>
       <header className={headerClass}>
-        <a href="#" className="logo">Мега сайт</a>
-        <ul className="nav">
-          <li><a href="#">О нас</a></li>
-          <li><a href="#">Услуги</a></li>
-          <li><a href="#">Кейсы</a></li>
-          <li><a href="#">Контакты</a></li>
-        </ul>
+       <button className="logo" onClick={() => window.scrollTo(0, 0)}>Мега сайт</button>
+<ul className="nav">
+  <li><button className="nav-link">О нас</button></li>
+  <li><button className="nav-link">Услуги</button></li>
+  <li><button className="nav-link">Кейсы</button></li>
+  <li><button className="nav-link">Контакты</button></li>
+</ul>
         <div className="header-right">
           <button className="btn header-btn" onClick={onOpenModal}>Связаться</button>
           <button className="burger" onClick={() => setIsMenuOpen(!isMenuOpen)}>☰</button>
@@ -41,11 +41,11 @@ function Header({ onOpenModal }) {
       </header>
       
       <div className={`mobile-menu ${isMenuOpen ? 'open' : ''}`}>
-        <a href="#" onClick={() => setIsMenuOpen(false)}>О нас</a>
-        <a href="#" onClick={() => setIsMenuOpen(false)}>Услуги</a>
-        <a href="#" onClick={() => setIsMenuOpen(false)}>Кейсы</a>
-        <a href="#" onClick={() => setIsMenuOpen(false)}>Контакты</a>
-      </div>
+  <button className="mobile-link" onClick={() => setIsMenuOpen(false)}>О нас</button>
+  <button className="mobile-link" onClick={() => setIsMenuOpen(false)}>Услуги</button>
+  <button className="mobile-link" onClick={() => setIsMenuOpen(false)}>Кейсы</button>
+  <button className="mobile-link" onClick={() => setIsMenuOpen(false)}>Контакты</button>
+</div>
     </>
   );
 }
