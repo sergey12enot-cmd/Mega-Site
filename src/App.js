@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Header from './Header';
+import MobileMenu from './mobile-menu'; // если он у тебя есть отдельно
+import Content from './content';
+import ModalMenu from './ModalMenu';
 
 function App() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {/* Передаем функцию открытия в Header */}
+      <Header onOpenModal={openModal} />
+      {/* Передаем состояние и функцию закрытия в ModalMenu */}
+      <ModalMenu isOpen={isModalOpen} onClose={closeModal} />
+      <Content />
+    </>
   );
 }
 
