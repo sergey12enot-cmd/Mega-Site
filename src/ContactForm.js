@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
 
+const inputClass = (hasError) =>
+  [
+    'w-full rounded-lg border px-3 py-2.5 text-base outline-none sm:text-sm',
+    'focus:border-brand',
+    hasError ? 'border-red-600' : 'border-[#ccc]',
+  ].join(' ');
+
 function ContactForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -11,7 +18,7 @@ function ContactForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
 
     let isValid = true;
 
@@ -30,61 +37,75 @@ function ContactForm() {
 
     if (isValid) {
       console.log('Отправлено:', { name, email, message });
-      
+
       setIsSubmitted(true);
     }
   };
 
   if (isSubmitted) {
     return (
-      <p className="success-text show">Твоя заявка принята, бедный тестировщик</p>
+      <p className="py-5 text-center text-base text-[#2a8a2a]">
+        Твоя заявка принята, бедный тестировщик
+      </p>
     );
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label htmlFor="name">Имя</label>
-        <input 
-          type="text" 
-          id="name" 
-          name="name" 
+      <div className="mb-4">
+        <label htmlFor="name" className="mb-1.5 block text-sm text-[#444]">
+          Имя
+        </label>
+        <input
+          type="text"
+          id="name"
+          name="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className={nameError ? 'error' : ''}
+          className={inputClass(nameError)}
         />
-        <div className={`error-text ${nameError ? 'show' : ''}`}>
+        <div className={`mt-1 text-xs text-red-600 ${nameError ? 'block' : 'hidden'}`}>
           Введи имя, бака тестировщик
         </div>
       </div>
 
-      <div className="form-group">
-        <label htmlFor="email">Почта</label>
-        <input 
-          type="text" 
-          id="email" 
-          name="email" 
+      <div className="mb-4">
+        <label htmlFor="email" className="mb-1.5 block text-sm text-[#444]">
+          Почта
+        </label>
+        <input
+          type="text"
+          id="email"
+          name="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className={emailError ? 'error' : ''}
+          className={inputClass(emailError)}
         />
-        <div className={`error-text ${emailError ? 'show' : ''}`}>
+        <div className={`mt-1 text-xs text-red-600 ${emailError ? 'block' : 'hidden'}`}>
           Введи нормальный email, бака тестировщик
         </div>
       </div>
 
-      <div className="form-group">
-        <label htmlFor="message">Супер Сообщение</label>
-        <textarea 
-          id="message" 
-          name="message" 
-          rows="3" 
+      <div className="mb-4">
+        <label htmlFor="message" className="mb-1.5 block text-sm text-[#444]">
+          Супер Сообщение
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          rows="3"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
+          className={`${inputClass(false)} resize-none`}
         />
       </div>
 
-      <button type="submit" className="btn">Отправить</button>
+      <button
+        type="submit"
+        className="w-full cursor-pointer rounded-[20px] bg-brand px-5 py-3 text-base text-white"
+      >
+        Отправить
+      </button>
     </form>
   );
 }
